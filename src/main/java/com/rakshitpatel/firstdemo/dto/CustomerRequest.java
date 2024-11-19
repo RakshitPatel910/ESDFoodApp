@@ -30,6 +30,9 @@ public record CustomerRequest(
         String address,
 
         @JsonProperty("pin_code")
-        String pinCode
+        String pinCode,
+
+        @JsonProperty("access_token")
+        String accessToken
 ) {
 }

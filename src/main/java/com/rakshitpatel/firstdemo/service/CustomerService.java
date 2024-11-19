@@ -45,6 +45,39 @@ public class CustomerService {
         return customerMapper.toCustomerResponse(customer);
     }
 
+    public String updateCustomer( CustomerRequest req) {
+        Customer customer = getCustomer(req.email());
+
+        String token = req.accessToken();
+
+        if(!jwtHelper.validateToken(token, customer.getEmail())){
+            throw new RuntimeException("Invalid access token");
+        }
+
+        customer.setFirstName(req.firstName());
+        customer.setLastName(req.lastName());
+        customer.setAddress(req.address());
+        customer.setPinCode(req.pinCode());
+
+        customerRepo.save(customer);
+
+        return "Customer updated successfully!";
+    }
+
+    public String deleteCustomer( CustomerRequest req ) {
+        Customer customer = getCustomer(req.email());
+
+        String token = req.accessToken();
+
+        if(!jwtHelper.validateToken(token, customer.getEmail())){
+            throw new RuntimeException("Invalid access token");
+        }
+
+        customerRepo.delete(customer);
+
+        return "Customer deleted successfully!";
+    }
+
     public String login(LoginRequest req){
         Customer customer = getCustomer(req.email());
 

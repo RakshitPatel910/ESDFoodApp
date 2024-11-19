@@ -25,4 +25,14 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(customerRequest));
     }
 
+    @PutMapping
+    public ResponseEntity<String> updateCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.updateCustomer(customerRequest));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.deleteCustomer(customerRequest));
+    }
+
 }
