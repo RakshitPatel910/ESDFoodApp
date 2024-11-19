@@ -45,12 +45,12 @@ public class CustomerService {
         return customerMapper.toCustomerResponse(customer);
     }
 
-    public String updateCustomer( CustomerRequest req) {
+    public String updateCustomer( String authToken, CustomerRequest req) {
         Customer customer = getCustomer(req.email());
 
-        String token = req.accessToken();
+//        String token = req.accessToken();
 
-        if(!jwtHelper.validateToken(token, customer.getEmail())){
+        if(!jwtHelper.validateToken(authToken, customer.getEmail())){
             throw new RuntimeException("Invalid access token");
         }
 
@@ -64,12 +64,12 @@ public class CustomerService {
         return "Customer updated successfully!";
     }
 
-    public String deleteCustomer( CustomerRequest req ) {
+    public String deleteCustomer( String authToken, CustomerRequest req ) {
         Customer customer = getCustomer(req.email());
 
-        String token = req.accessToken();
+//        String token = req.accessToken();
 
-        if(!jwtHelper.validateToken(token, customer.getEmail())){
+        if(!jwtHelper.validateToken(authToken, customer.getEmail())){
             throw new RuntimeException("Invalid access token");
         }
 

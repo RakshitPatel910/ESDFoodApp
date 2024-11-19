@@ -26,13 +26,13 @@ public class CustomerController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
-        return ResponseEntity.ok(customerService.updateCustomer(customerRequest));
+    public ResponseEntity<String> updateCustomer(@RequestHeader ("Authorization") String authToken, @RequestBody @Valid CustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.updateCustomer(authToken, customerRequest));
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteCustomer(@RequestBody @Valid CustomerRequest customerRequest) {
-        return ResponseEntity.ok(customerService.deleteCustomer(customerRequest));
+    public ResponseEntity<String> deleteCustomer(@RequestHeader ("Authorization") String authToken, @RequestBody @Valid CustomerRequest customerRequest) {
+        return ResponseEntity.ok(customerService.deleteCustomer(authToken, customerRequest));
     }
 
 }

@@ -16,7 +16,7 @@ public class CustomerMapper {
                 .password(req.password())
                 .address(req.address())
                 .pinCode(req.pinCode())
-                .accessToken(req.accessToken())
+//                .accessToken(req.accessToken())
                 .build();
     }
 

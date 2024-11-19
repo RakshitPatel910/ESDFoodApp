@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.*;
 import jakarta.persistence.*;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,7 +28,7 @@ public class Customer {
     @Column(name="last_name")
     private String lastName;
 
-    @Column(name="email")
+    @Column(name="email", unique = true, nullable = false)
     private String email;
 
     @Column(name="password")
@@ -39,6 +40,6 @@ public class Customer {
     @Column(name="pin_code")
     private String pinCode;
 
-    @Column(name="access_token", unique=true)
-    private String accessToken;
+//    @Column(name="access_token", unique=true)
+//    private String accessToken;
 }
