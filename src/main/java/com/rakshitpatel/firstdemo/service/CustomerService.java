@@ -22,7 +22,8 @@ public class CustomerService {
 
     public String createCustomer(CustomerRequest req) {
         Customer customer = customerMapper.toCustomer(req);
-        customer.setPassword(customer.getPassword());
+
+        customer.setPassword(encryptionService.encryptPassword(customer.getPassword()));
 
 //        System.out.println(customer.getFirstName() + customer.getLastName());
 
@@ -81,7 +82,7 @@ public class CustomerService {
     public String login(LoginRequest req){
         Customer customer = getCustomer(req.email());
 
-        if(!encryptionService.validate(req.password(), encryptionService.encryptPassword(customer.getPassword()))){
+        if(!encryptionService.validate(req.password(), customer.getPassword())){
             System.out.println( req.password() + " " + customer.getPassword() );
             return "Incorrect password";
         }
